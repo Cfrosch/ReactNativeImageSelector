@@ -14,11 +14,12 @@ export default function App() {
 
   const pickImageAsync = async () => {
     let result = await ImagePicker.launchImageLibraryAsync({
-      allowsEditing: false,
+      allowsEditing: true,
       quality: 1,
     });
     if (!result.canceled) {
       console.log(result);
+      setSelectedImage(result.assets[0].uri);
     } else {
       alert('You did not select any image.');
     }
@@ -27,7 +28,7 @@ export default function App() {
   return (
     <View style={styles.container}>
       <View style={styles.imageContainer}>
-        <ImageViewer placeholderImageSource={PlaceholderImage} />
+        <ImageViewer selectedImage={selectedImage} placeholderImageSource={PlaceholderImage} />
       </View>
       <View style={styles.buttonContainer}>
         <Button onPress={pickImageAsync} theme="primary" label='Choose a photo'></Button>
@@ -43,14 +44,15 @@ const styles = StyleSheet.create({
     flex: 1,
     backgroundColor: '#25292e',
     alignItems: 'center',
-    justifyContent: 'center',
+    justifyContent: 'space-evenly',
   },
   imageContainer: {
     flex: 1,
-    paddingTop: 58,
+    marginTop: 68,
+    alignItems: 'center'
   },
   buttonContainer: {
-    flex: 1/3,
+    flex: 2/3,
     alignItems: 'center'
   }
 });

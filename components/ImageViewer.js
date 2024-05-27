@@ -1,8 +1,17 @@
 import { StyleSheet, Image } from 'react-native';
 
-export default function ImageViewer({ placeholderImageSource }) {
+export default function ImageViewer({ placeholderImageSource, selectedImage}) {
+
+  if(!selectedImage) {
+    return (
+      <Image source={placeholderImageSource} style={styles.image} />
+    );
+  }
+
   return (
-    <Image source={placeholderImageSource} style={styles.image} />
+    <Image source={{
+      uri: selectedImage
+    }} style={styles.image} />
   );
 }
 
